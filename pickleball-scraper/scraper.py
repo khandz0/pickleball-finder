@@ -1,4 +1,4 @@
-import requests 
+import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
@@ -51,16 +51,38 @@ def save_to_csv(dataframe, filename="pickleball_courts.csv"):
     dataframe.to_csv(filename, index=False)
     print(f"Data saved to {filename}")
 
+"""
+CHROMEDRIVER_PATH = "/opt/homebrew/bin/chromedriver"  # Adjust if needed
 
 def setup_driver():
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Run without opening a browser
+    options.add_argument("--headless") 
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920x1080")
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    service = Service(CHROMEDRIVER_PATH)
+    driver = webdriver.Chrome(service=service, options=options)
+
+    return driver
+
+"""
+
+
+def setup_driver():
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")  # Run Chrome in headless mode
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920x1080")
+
+    # Initialize the Chrome driver using the updated webdriver-manager
+    service = Service(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=options)
+
+    return driver
+
 
 def scrape_pickleheads():
-    url = "https://www.pickleheads.com/courts"
+    url = "https://sanjosepickleballclub.org/places-to-play/"
     driver = setup_driver()
     driver.get(url)
     
