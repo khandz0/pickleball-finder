@@ -82,7 +82,7 @@ def setup_driver():
 
 
 def scrape_pickleheads():
-    url = "https://sanjosepickleballclub.org/places-to-play/"
+    url = "https://www.johnkewpickleball.com/paddle-database"
     driver = setup_driver()
     driver.get(url)
     
